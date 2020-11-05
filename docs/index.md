@@ -1,37 +1,27 @@
-## Welcome to GitHub Pages
+## Welcome to AmbitiousEffect page
 
-You can use the [editor on GitHub](https://github.com/CiprianBodnar/AmbitiousEffect/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+### Actors
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+The principle actor is the user that have direct contact with his virtual assistant.
 
-```markdown
-Syntax highlighted code block
+### Preconditions
 
-# Header 1
-## Header 2
-### Header 3
+The application is installed on device and also a register is made in scope of a better user experience with the assistent. (?)
 
-- Bulleted
-- List
+### Flow
 
-1. Numbered
-2. List
+1.The user is logged in (?) 
 
-**Bold** and _Italic_ and `Code` text
+2.the user is informed with a day before on what should eat - this is more like a negociation, because the assistant show a list of menus and the user choose the menu and also the weight. In this way, the assistant pop up the reminder with a day before in scope to purchase the ingredients for the meal.
 
-[Link](url) and ![Image](src)
-```
+3.the user is informed about the menu from that day  with an hour before, the exception is in the morning because it is reminded in previous flow
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+4.The assistant wants necessary information from the user to create a concrete profile. The necessary are: alimentation preferences, day by day activities, height and weight of the user and other medical condition and problems. 
 
-### Jekyll Themes
+5.The user provide a feedback after each meal in wich a rating si provided and the user can specify some ingredients. Both interactions are made in natural language.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/CiprianBodnar/AmbitiousEffect/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+6.The application display the evolution of the user by graphics that are used for future actions.
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+7. Number of steps that are made by the user is an important factor for calculation of calories, in this case the application must provide this number of steps that can help in statistics and other function like meal recommendation.
