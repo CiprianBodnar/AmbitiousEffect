@@ -1,16 +1,16 @@
-## Welcome to AmbitiousEffect page
+# Welcome to AmbitiousEffect page
 
 
 
-### Actors
+# Actors
 
 The principle actor is the user that have direct contact with his virtual assistant.
 
-### Preconditions
+# Preconditions
 
 The application is installed on device and also a register is made in scope of a better user experience with the assistent. (?)
 
-### Flow
+# Flow
 
 1.The user is logged in (?) 
 
@@ -26,7 +26,27 @@ The application is installed on device and also a register is made in scope of a
 
 7. Number of steps that are made by the user is an important factor for calculation of calories, in this case the application must provide this number of steps that can help in statistics and other function like meal recommendation.
 
-### Technology
-***There are two broad approach to knowledge search:
-1.Ontology based Knowledge Search (Mainly through knowledge Graph)
-2.Knowledge Search through Open Domain Question Answering
+# Arhitecture
+## There are two broad approach to knowledge search:
+### 1.Ontology based Knowledge Search (Mainly through knowledge Graph)
+### 2.Knowledge Search through Open Domain Question Answering
+
+High Level Architecture of a question answering module
+https://miro.medium.com/max/875/1*sbAR0BSuof6bgKUcv6zNUA.png
+
+## NLU Layer
+The main purpose of NLU layer is to build a Graph Query From the Text. This is one of the bottle neck of Ontology Based Knowledge Search which is making a structured query (in GQL) from free flow of text (Open domain question answering try to solve this in a neural manner)
+## Machine Translation Block
+This is also not mandatory In case of Language agnostic Knowledge Graph. There are two ways to build Knowledge Graph which is language agnostic and Language Aware. Most of the Public knowledge Graph is Language agnostic (Beyond the scope of this article.
+## Steps
+### Train speech to text model for each language supported
+### Store structured knowledge (subject, predicate, object) like wikidata or dbpedia (Crawled Wikipedia) into a Knowledge graph
+### Enrich and store knowldge from unstructured news article and other sources into the knowledge graph.
+### Text2Intent layer to understand (classification) user intent
+### Build NLU (Natural Language Understanding) Layer to understand user query or command or Intent (look at rasa)
+### Query Adapter layer to knowledge graph for intent to Graph Query Language (GQL)
+### Integration hook with home automation or other third party apps
+### NLG (Natural Language Generation) layer
+### Conversational chatbot design
+### Machine Translation layer to translate english to supported language (optional).
+### Text2Speech model for each language supported
