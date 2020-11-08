@@ -32,7 +32,7 @@ The application is installed on device and also a register is made in scope of a
 ### 2.Knowledge Search through Open Domain Question Answering
 
 High Level Architecture of a question answering module
-https://miro.medium.com/max/875/1*sbAR0BSuof6bgKUcv6zNUA.png
+![image](https://miro.medium.com/max/875/1*sbAR0BSuof6bgKUcv6zNUA.png)
 
 ## NLU Layer
 The main purpose of NLU layer is to build a Graph Query From the Text. This is one of the bottle neck of Ontology Based Knowledge Search which is making a structured query (in GQL) from free flow of text (Open domain question answering try to solve this in a neural manner)
