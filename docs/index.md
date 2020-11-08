@@ -25,3 +25,8 @@ The application is installed on device and also a register is made in scope of a
 6.The application display the evolution of the user by graphics that are used for future actions.
 
 7. Number of steps that are made by the user is an important factor for calculation of calories, in this case the application must provide this number of steps that can help in statistics and other function like meal recommendation.
+
+### Technology
+***There are two broad approach to knowledge search:
+1.Ontology based Knowledge Search (Mainly through knowledge Graph)
+2.Knowledge Search through Open Domain Question Answering
