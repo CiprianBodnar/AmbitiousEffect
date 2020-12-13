@@ -6,13 +6,21 @@ import os
 import keyboard
 import speech_recognition as sr
 
-chatbot = ChatBot('Ron Obvious')
+chatbot = ChatBot(
+    'Terminal',
+    storage_adapter='chatterbot.storage.SQLStorageAdapter',
+    logic_adapters=[
+        'chatterbot.logic.MathematicalEvaluation',
+        'chatterbot.logic.BestMatch'
+    ],
+    database_uri='sqlite:///database.db'
+)
 
 # Create a new trainer for the chatbot
 trainer = ChatterBotCorpusTrainer(chatbot)
 
 # Train the chatbot based on the english corpus
-trainer.train("chatterbot.corpus.english")
+trainer.train("chatterbot.corpus.english","chatterbot.corpus.english.conversations"1)
 
 # Get a response to the input text 'I would like to book a flight.'
 
