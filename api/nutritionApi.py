@@ -22,11 +22,16 @@ def nutrition_api(ingr):
     data = r.json()
 
     calories = data['calories']
-    fat_level = data['dietLabels'][0]
+    if len(data['dietLabels']) > 0:
+        fat_level = data['dietLabels'][0]
+    else:
+        fat_level = "Unknown"
 
     print("Calories:%s\nFat Level:%s" % (calories, fat_level))
 
 
-# nutrition_api("2 apple")
+# nutrition_api("apple")
 # nutrition_api("100g apple")
-nutrition_api("apple")
+# nutrition_api("2 apple")
+# nutrition_api("300g nuggets")
+# nutrition_api('"300g nuggets",\n "2 apple"')

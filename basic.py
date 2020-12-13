@@ -1,5 +1,6 @@
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer,ListTrainer
+from api.nutritionApi import nutrition_api
 
 import pyttsx3
 import os
@@ -37,7 +38,11 @@ while True:
             text = input('You: ')
 
             reply = chatbot.get_response(text)
-            if (text != 'bye'):
+            if any(char.isdigit() for char in text):
+                reply = nutrition_api(text)
+                # print(nutrition_api(text))
+
+            elif (text != 'bye'):
                 reply = chatbot.get_response(text)
 
             if (text == 'bye'):
@@ -63,7 +68,13 @@ while True:
                     text = 'Sorry'
                 print(text)
                 reply = chatbot.get_response(text)
-                if (text != 'bye'):
+
+                if any(char.isdigit() for char in text):
+                    reply = nutrition_api(text)
+                    engine.say(reply)
+                    engine.runAndWait()
+
+                elif (text != 'bye'):
                     reply = chatbot.get_response(text)
 
                 if (text == 'bye'):
