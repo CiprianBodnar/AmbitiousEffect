@@ -1,7 +1,8 @@
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer,ListTrainer
 from api.nutritionApi import nutrition_api
-
+from constructProfiler import insertProfileOption
+from constructProfiler import returnQuestion
 import pyttsx3
 import os
 import keyboard
@@ -29,10 +30,19 @@ trainer.train("chatterbot.corpus.english","chatterbot.corpus.english.conversatio
 engine=pyttsx3.init()
 engine.setProperty('voice','HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0')
 
+def profileMaker():
+    index = 0
+    while returnQuestion(index) != "":
+        q = returnQuestion(index)
+        print(q)
+        ans = input('You: ')
+        insertProfileOption(q,ans)
+        index = index +1
 
 print("Press 1 for text or 2 for speech:")
 while True:
     if keyboard.read_key() == "1":
+        profileMaker()
         while True:
             print("write anything: ")
             text = input('You: ')
