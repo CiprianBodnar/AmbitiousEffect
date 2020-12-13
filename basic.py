@@ -20,7 +20,7 @@ chatbot = ChatBot(
 trainer = ChatterBotCorpusTrainer(chatbot)
 
 # Train the chatbot based on the english corpus
-trainer.train("chatterbot.corpus.english","chatterbot.corpus.english.conversations"1)
+trainer.train("chatterbot.corpus.english","chatterbot.corpus.english.conversations")
 
 # Get a response to the input text 'I would like to book a flight.'
 
