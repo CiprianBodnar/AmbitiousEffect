@@ -1,6 +1,6 @@
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer,ListTrainer
-from api.nutritionApi import nutrition_api
+from api.nutritionApi import nutrition_api, contain_vegetables_fruits
 from constructProfiler import insertProfileOption
 from constructProfiler import returnQuestion
 import pyttsx3
@@ -46,13 +46,13 @@ while True:
         while True:
             print("write anything: ")
             text = input('You: ')
-
             reply = chatbot.get_response(text)
-            if any(char.isdigit() for char in text):
-                reply = nutrition_api(text)
-                # print(nutrition_api(text))
 
-            elif (text != 'bye'):
+            aliments, vegetable_fruits_flag = contain_vegetables_fruits(text)
+            if vegetable_fruits_flag:
+                reply = nutrition_api(aliments) + "calories"
+
+            elif (text != 'byeta '):
                 reply = chatbot.get_response(text)
 
             if (text == 'bye'):
@@ -79,8 +79,9 @@ while True:
                 print(text)
                 reply = chatbot.get_response(text)
 
-                if any(char.isdigit() for char in text):
-                    reply = nutrition_api(text)
+                aliments, vegetable_fruits_flag = contain_vegetables_fruits(text)
+                if vegetable_fruits_flag:
+                    reply = nutrition_api(aliments) + "calories"
                     engine.say(reply)
                     engine.runAndWait()
 
