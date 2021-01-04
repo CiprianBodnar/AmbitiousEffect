@@ -1,0 +1,6 @@
+
+tpython:S117$"]Rename this local variable "jsonResponse" to match the regular expression ^[_a-z][a-z0-9_]*$.(øýßð
+tpython:S1176"]Rename this local variable "jsonResponse" to match the regular expression ^[_a-z][a-z0-9_]*$.(øýßð
+~python:S1542""aRename function "profileQuestionGenerator" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(ááüºÿÿÿÿÿ
+vpython:S1542."^Rename function "profileQuestionAnswer" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(¸ÐÙÛ
+upython:S15424"XRename function "processQuestion" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(§ò†Èýÿÿÿÿ

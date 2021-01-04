@@ -1,0 +1,4 @@
+
+Gpython:S1481"*Remove the unused local variable "result".(àÿäŒşÿÿÿÿ
+tpython:S1542"\Rename function "insertProfileOption" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(É²ñ
+tpython:S1542"WRename function "returnQuestion" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(ò·”ûÿÿÿÿ
