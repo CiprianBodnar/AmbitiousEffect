@@ -1,6 +1,6 @@
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer,ListTrainer
-from api.nutritionApi import nutrition_api, contain_vegetables_fruits
+from api.nutritionApi import nutrition_api, contain_vegetables_fruits, countCalories
 from constructProfiler import insertProfileOption
 from constructProfiler import returnQuestion
 import pyttsx3
@@ -37,7 +37,7 @@ def profileMaker():
         print(q)
         ans = input('You: ')
         insertProfileOption(q,ans)
-        index = index +1
+        index = index + 1
 
 print("Press 1 for text or 2 for speech:")
 while True:
@@ -50,7 +50,7 @@ while True:
 
             aliments, vegetable_fruits_flag = contain_vegetables_fruits(text)
             if vegetable_fruits_flag:
-                reply = nutrition_api(aliments) + "calories"
+                reply = str(countCalories(aliments)) + " calories"
 
             elif (text != 'byeta '):
                 reply = chatbot.get_response(text)
@@ -81,7 +81,7 @@ while True:
 
                 aliments, vegetable_fruits_flag = contain_vegetables_fruits(text)
                 if vegetable_fruits_flag:
-                    reply = nutrition_api(aliments) + "calories"
+                    reply = str(countCalories(aliments)) + " calories"
                     engine.say(reply)
                     engine.runAndWait()
 

@@ -80,9 +80,9 @@ def nutrition_api(ingr):
 def countCalories(ingredients):
     totalCalories = 0
     for ingr in ingredients.split(',\n'):
-        print(ingr + " "  + str(nutrition_api(ingr)))
+        # print(ingr + " "  + str(nutrition_api(ingr)))
         totalCalories = totalCalories + nutrition_api(ingr)
-    print(totalCalories)
+    return totalCalories
 
 
 # nutrition_api("apple")
@@ -94,4 +94,4 @@ def countCalories(ingredients):
 
 
 new_sentence, flag = contain_vegetables_fruits(sentence="how much calories has 100g apple 4 banana 200g avocado carrot  1 sausage  500g meat mama")
-countCalories(new_sentence)
+# countCalories(new_sentence)
