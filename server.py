@@ -6,6 +6,9 @@ from constructProfiler import returnQuestion
 
 from chatBootReplayer import chatBootReplyer
 
+import datetime
+import stepcounter
+
 chatbot = ChatBot(
     'Terminal',
     storage_adapter='chatterbot.storage.SQLStorageAdapter',
@@ -48,15 +51,29 @@ def profileQuestionAnswer():
     insertProfileOption(data["question"]), data["response"]
     return jsonify(data), 200
 
-@app.route("/chat/question", methods=["POST"])
-def processQuestion():
+@app.route("/chat/question/<user>", methods=["POST"])
+def processQuestion(user):
     data = request.get_json()  # status code
+    lastWeek = datetime.date.today() - datetime.timedelta(days=7)
+    with stepcounter.DatabaseConnection(user) as db:
+        steps = db.get_number_of_steps_after(lastWeek)
     jsonResponse = {}
     jsonResponse["question"] = data["question"]
-    jsonResponse["answer"] = chatBootReplyer(chatbot, data["question"])
+    jsonResponse["answer"] = chatBootReplyer(chatbot, data["question"], steps)
     return jsonify(jsonResponse), 200
+
+@app.route("/steps/<user>", methods=["POST"])
+def steps(user):
+    data = request.get_json()
+    steps = data["steps"]
+    with stepcounter.DatabaseConnection(user) as db:
+        db.add_steps(steps, datetime.date.today())
+    return "Steps uploaded successfully", 201
 
 # Checks to see if the name of the package is the run as the main package.
 if __name__ == "__main__":
     # Runs the Flask application only if the main.py file is being run.
-    app.run()
+    app.run(
+        host="0.0.0.0",
+        port=5000,
+        )
