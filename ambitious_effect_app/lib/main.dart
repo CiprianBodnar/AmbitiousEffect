@@ -28,12 +28,14 @@ class _MyAppState extends State<MyApp> {
   String _status = '?';
   int _steps = 0;
   int _sent_steps = 0;
+  String _message = '';
   String _answer_text = '';
   String _username = '';
   String _hostname = '';
   final Map<String, String> _json_headers = {
     'content-type': 'application/json'
   };
+
   String get _addStepsEndpoint {
     return "http://" + _hostname + "/steps/" + _username;
   }
@@ -47,12 +49,49 @@ class _MyAppState extends State<MyApp> {
     initPlatformState();
   }
 
+  bool checkUsernameAndHost({bool doAlert}) {
+    if (_username.trim() == '') {
+      if(doAlert) {
+        popupError('Please set username');
+      }
+      return false;
+    } else if (_hostname.trim() == '') {
+      if(doAlert) {
+        popupError('Please set host');
+      }
+      return false;
+    }
+    return true;
+  }
+
+  void popupError(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void onStepCount(StepCount event) {
     print(event);
     setState(() {
       int newSteps = event.steps;
       _steps = newSteps;
 
+      if(!checkUsernameAndHost(doAlert: false)) {
+        return;
+      }
       String body = json.encode({
         "steps": newSteps - _sent_steps
       });
@@ -107,17 +146,29 @@ class _MyAppState extends State<MyApp> {
     _hostname = host;
   }
 
-  void queryChatbot(String question) {
+  void setMessage(String message) {
+    _message = message;
+  }
+
+  void queryChatbot([String msg]) {
+    if(!checkUsernameAndHost(doAlert: true)) {
+      return;
+    }
+    setState(() {
+      _answer_text = '';
+    });
     String body = json.encode({
-      "question": question,
+      "question": _message,
     });
     http.post(_chatQuestionEndpoint, headers: _json_headers, body: body).
-    then((response){
+     then((response){
       if(response.statusCode == 200) {
         setState(() {
           var answer = json.decode(response.body)['answer'];
           _answer_text = answer;
         });
+      } else {
+        popupError(response.body);
       }
     });
   }
@@ -152,7 +203,7 @@ class _MyAppState extends State<MyApp> {
                           border: OutlineInputBorder(),
                           labelText: 'Username',
                         ),
-                        onSubmitted: updateUsername,
+                        onChanged: updateUsername,
                       ),
                   ),
                 ],
@@ -183,7 +234,7 @@ class _MyAppState extends State<MyApp> {
                                   border: OutlineInputBorder(),
                                   labelText: 'Host',
                                 ),
-                                onSubmitted: updateHost,
+                                onChanged: updateHost,
                               ),
                             );
                           },
@@ -203,15 +254,32 @@ class _MyAppState extends State<MyApp> {
                 children: <Widget>[
                   Container(
                     height: 100,
-                    width: 300,
+                    width: 250,
                     child: TextField(
-                      // maxLines: 3,
+                      maxLines: 3,
+                      textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Question',
                       ),
+                      onChanged: setMessage,
                       onSubmitted: queryChatbot,
+                      onEditingComplete: queryChatbot,
                     ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 45,
+                        child: IconButton(
+                          color: Colors.blue,
+                          icon: const Icon(Icons.send_rounded),
+                          iconSize: 45,
+                          onPressed: queryChatbot,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
