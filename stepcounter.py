@@ -3,14 +3,17 @@ import pymysql
 import pymysql.cursors
 
 
-def read_database_config():
-    with open("stepcounter_database_config.json") as f:
-        return json.load(f)
+def read_database_config(db_config_path):
+    try:
+        with open(db_config_path) as f:
+            return json.load(f)
+    except Exception as exc:
+        raise Exception("Please add configuration file " + db_config_path) from exc 
 
 
 class DatabaseConnection:
-    SQL_PLACEHOLDER = "%s"
-    CONFIG = read_database_config()
+    DB_CONFIG_PATH = "stepcounter_database_config.json"
+    CONFIG = read_database_config(DB_CONFIG_PATH)
 
     def __init__(self, user):
         self.user = user
