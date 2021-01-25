@@ -55,8 +55,8 @@ def profileQuestionAnswer():
 def processQuestion(user):
     data = request.get_json()  # status code
     lastWeek = datetime.date.today() - datetime.timedelta(days=7)
-    with stepcounter.DatabaseConnection(user) as db:
-        steps = db.get_number_of_steps_after(lastWeek)
+  #  with stepcounter.DatabaseConnection(user) as db:
+      #  steps = db.get_number_of_steps_after(lastWeek)
     jsonResponse = {}
     jsonResponse["question"] = data["question"]
     jsonResponse["answer"] = chatBootReplyer(chatbot, data["question"], steps)
@@ -69,6 +69,28 @@ def steps(user):
     with stepcounter.DatabaseConnection(user) as db:
         db.add_steps(steps, datetime.date.today())
     return "Steps uploaded successfully", 201
+
+
+#...............
+@app.route("/menu/breakfast",  methods=["GET"])
+def getBreakFastMenu():
+
+    resultJson = {}
+    myLisy = []
+    menuJson = {}
+
+    menuJson["menu"] = "I propose some oak with banana and apple. Yes or no?"
+    menuJson["points"] = 0
+    myLisy.append(menuJson)
+    menuJson["menu"] = "I propose some  milk and apple. Yes or no?"
+    menuJson["points"] = 2
+    myLisy.append(menuJson)
+    resultJson["info"] = myLisy
+
+
+    return resultJson
+
+#..............
 
 # Checks to see if the name of the package is the run as the main package.
 if __name__ == "__main__":

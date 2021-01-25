@@ -10,8 +10,9 @@ def chatBootReplyer(chatbot, text, steps):
     elif (text != 'byeta '):
         reply = chatbot.get_response(text).text
 
-    reply += " You've walked %d steps. Have a pizza!" % steps
+   # reply += " You've walked %d steps. Have a pizza!" % steps
 
     if (text == 'bye'):
         print('Bot: Bye')
     return reply
+
