@@ -3,7 +3,7 @@ connection = MongoClient('localhost', 27017)
  
 my_database = connection.AmbitiousEffect
 data = my_database.data
-questions = ["What is your name?", "What body weight do you have?", "How old are you?","Give me 3 best meals that you like."]
+questions = ["What is your name?", "What body weight do you have?",  "How old are you?","What height do you have?", "Give me best meals that you like.", "What you eat today?"]
 
 def insertProfileOption(question:str, answer:str):
 

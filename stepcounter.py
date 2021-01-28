@@ -8,7 +8,7 @@ def read_database_config(db_config_path):
         with open(db_config_path) as f:
             return json.load(f)
     except Exception as exc:
-        raise Exception("Please add configuration file " + db_config_path) from exc 
+        raise Exception("Please add configuration file " + db_config_path) from exc
 
 
 class DatabaseConnection:

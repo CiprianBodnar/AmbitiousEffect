@@ -2,6 +2,7 @@ from api.nutritionApi import nutrition_api, contain_vegetables_fruits, countCalo
 
 
 def chatBootReplyer(chatbot, text, steps):
+    print(text)
     reply = chatbot.get_response(text)
     aliments, vegetable_fruits_flag = contain_vegetables_fruits(text)
     if vegetable_fruits_flag:
@@ -13,6 +14,6 @@ def chatBootReplyer(chatbot, text, steps):
    # reply += " You've walked %d steps. Have a pizza!" % steps
 
     if (text == 'bye'):
-        print('Bot: Bye')
+        reply = 'Bye'
     return reply
 
